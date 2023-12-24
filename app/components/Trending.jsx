@@ -26,7 +26,11 @@ const Trending = () => {
         const fetchUserFavorites = async () => {
             try {
                 const userFavourite = await getDoc(doc(db, 'giphy', authUser?.uid))
+<<<<<<< HEAD
                 // console.log(userFavourite);
+=======
+                console.log(userFavourite);
+>>>>>>> a1849babf20529c65d964506d9e763bdee93dcaa
                 setFavorites(userFavourite.data()?.favourite)
             } catch (error) {
                 console.error(error);
@@ -52,7 +56,11 @@ const Trending = () => {
 
     useEffect(() => {
         
+<<<<<<< HEAD
         
+=======
+        // Clear previous debounce timeout
+>>>>>>> a1849babf20529c65d964506d9e763bdee93dcaa
         if (debounceTimeout) {
             clearTimeout(debounceTimeout);
         }
