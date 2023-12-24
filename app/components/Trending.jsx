@@ -18,7 +18,7 @@ const Trending = () => {
     const [favorites, setFavorites] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
-    let debounceTimeout;
+    
 
     useEffect(() => {
         const fetchUserFavorites = async () => {
@@ -48,6 +48,7 @@ const Trending = () => {
     };
 
     useEffect(() => {
+        let debounceTimeout;
         // Clear previous debounce timeout
         if (debounceTimeout) {
             clearTimeout(debounceTimeout);
