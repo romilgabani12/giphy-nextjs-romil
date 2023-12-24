@@ -5,7 +5,7 @@ import { FcGoogle } from "react-icons/fc";
 import Link from "next/link";
 import './register.css'
 import { useRouter } from 'next/navigation';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
 import {
     createUserWithEmailAndPassword,
     updateProfile,
@@ -15,6 +15,7 @@ import {
 } from "firebase/auth";
 import { useAuth } from '../auth';
 import Loader from '../components/Loader';
+
 
 const Provider = new GoogleAuthProvider();
 
@@ -48,11 +49,14 @@ const page = () => {
                 displayName: username,
             });
 
+
             setAuthUser({
-                uid: user.uid,
+                userId: user.uid,
                 email: user.email,
                 username,
             });
+
+
 
         } catch (error) {
             console.error("An error occured", error);

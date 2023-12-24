@@ -3,18 +3,34 @@ import React, { useState, useEffect } from 'react'
 import Loader from './Loader';
 import { useAuth } from '../auth';
 import './Trending.css'
+import { getDoc, doc } from "firebase/firestore";
+import { db } from '../firebase';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const Trending = () => {
 
     const apiKey = "GlVGYHkr3WSBnllca54iNt0yFbjz7L65";
     const [gifData, setGifData] = useState([]);
     const [type, setType] = useState("trending");
-    const { authUser,searchTerm } = useAuth();
+    const { authUser, searchTerm } = useAuth();
 
     const [faved, setFaved] = useState(false)
     const [favorites, setFavorites] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
+    let debounceTimeout;
+
+    useEffect(() => {
+        const fetchUserFavorites = async () => {
+            try {
+                const userFavourite = await getDoc(doc(db, 'giphy', authUser?.uid))
+                setFavorites(userFavourite.data()?.favourite)
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        fetchUserFavorites();
+    }, [])
 
     const fetchGif = async () => {
         const newType = searchTerm ? "search" : "trending";
@@ -27,21 +43,40 @@ const Trending = () => {
             setGifData(data.data);
             setIsLoading(false);
         } else {
-            throw new Error("Failed to fetch data");
+            throw new Error(" fetch data ==> Failed ");
         }
     };
 
+    useEffect(() => {
+        // Clear previous debounce timeout
+        if (debounceTimeout) {
+            clearTimeout(debounceTimeout);
+        }
+        // Set a new debounce timeout
+        debounceTimeout = setTimeout(() => {
+            fetchGif();
+        }, 200);
+
+        // // Clean up the timeout when the component unmounts
+        return () => {
+            if (debounceTimeout) {
+                clearTimeout(debounceTimeout);
+            }
+        };
+    }, [searchTerm, type, `https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${50}&offset=${0}`]);
+
+
     const handleFavorite = async (gifId) => {
-        const response = await fetch(`api/favorite/${authUser.uid}?gifId=${gifId}`);
-        // console.log(response);
+        const response = await fetch(`api/favourite/${authUser.userId}?gifId=${gifId}`);
+
+
         const data = await response.json()
         // console.log(data);
         setFaved(prev => !prev)
     }
 
-    useEffect(() => {
-        fetchGif();
-    }, [])
+
+
 
 
     return isLoading ? <Loader /> : (
@@ -56,7 +91,7 @@ const Trending = () => {
                         {favorites.includes(gif.id) ? (
                             <button onClick={() => handleFavorite(gif.id)}>Remove from Favs</button>
                         ) : (
-                            <button onClick={() => handleFavorite(gif.id)}>Add to Favs</button>
+                            <button onClick={() => handleFavorite(gif.id)}>Add to Favs<FavoriteBorderIcon/></button>
                         )}
                     </div>
                 </div>

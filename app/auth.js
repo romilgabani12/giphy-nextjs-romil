@@ -7,12 +7,13 @@ import { auth } from "./firebase";
 const AuthUserContext = createContext({
     authUser: null,
     isLoading: true,
+    searchTerm : 'cricket',
 });
 
 export default function useFirebaseAuth() {
     const [authUser, setAuthUser] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [searchTerm, SetSearchTerm] = useState('welcome')
+    const [searchTerm, SetSearchTerm] = useState('cricket')
 
     const clear = () => {
         setAuthUser(null);
@@ -26,7 +27,7 @@ export default function useFirebaseAuth() {
             return;
         }
         setAuthUser({
-            uid: user.uid,
+            userId: user.uid,
             email: user.email,
             username: user.displayName,
         });

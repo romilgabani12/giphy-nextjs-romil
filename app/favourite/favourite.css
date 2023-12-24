@@ -1,0 +1,87 @@
+/* styles.css */
+
+.page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-container {
+    text-align: left;
+    margin-right: 20px;
+    /* Adjust margin as needed */
+    background-color: #f0f0f0;
+    /* Set your desired background color */
+    padding: 10px;
+    /* Add padding for better visual */
+    border-radius: 5px;
+    /* Add border-radius for rounded corners */
+}
+
+.logo-image {
+    width: 230px;
+    height: 40px;
+}
+
+.gif-container {
+    flex-grow: 1;
+}
+
+.gifContainer {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.gifWrapper {
+    margin-bottom: 10px;
+}
+
+.gifIframe {
+    width: 100%;
+    height: auto;
+    border: none;
+}
+
+.gifInfo {
+    text-align: center;
+}
+
+.gifTitle {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.favoriteButton {
+    padding: 5px 10px;
+    background: #4285f4;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+
+.noDataMessage {
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    color: black; /* Adjust the color as needed */
+    padding-top: 300px;
+  }
+  
+  .noDataMessage a {
+    display: block;
+    margin-top: 10px;
+    color: #4285f4; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .noDataMessage a:hover {
+    text-decoration: underline;
+  }

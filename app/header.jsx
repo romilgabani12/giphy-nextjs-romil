@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image";
-import Link from "next/link";
 import React, { useEffect } from "react";
 
 import { useRouter } from 'next/navigation';
@@ -12,8 +11,8 @@ const Header = () => {
 
     const router = useRouter();
 
-    const { authUser, isLoading, signOut } = useAuth();
-    
+    const { authUser, isLoading, signOut, SetSearchTerm } = useAuth();
+
 
     useEffect(() => {
         if (!isLoading && !authUser) {
@@ -37,8 +36,19 @@ const Header = () => {
                 />
             </div>
 
+            <form onSubmit={(e)=>e.preventDefault()} >
+                <input
+                    className="custom-input"
+                    type="text"
+                    placeholder="Type any words..."
+                    onChange={(e) => SetSearchTerm(e.target.value)}
+                />
 
-            <button className="logout" onClick={()=>(router.push(`/favorite?userId=${authUser.uid}`))}>
+                <button className="logout">Search</button>
+            </form>
+
+
+            <button className="logout" onClick={() => (router.push(`/favourite?userId=${authUser.userId}`))}>
 
                 Favourite
 
