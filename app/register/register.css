@@ -1,0 +1,120 @@
+/* styles.css */
+
+@keyframes buttonScale {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.container {
+  text-align: center;
+  width: 300px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #333333;
+}
+
+button {
+  background-color: #000000; /* Change to black */
+  color: white;
+  padding: 12px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.5s ease;
+  animation: buttonScale 2s infinite;
+}
+
+button:hover {
+  background-color: #333333; /* Change to a darker shade of black */
+  animation: none;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  border-color: #000000; /* Change to black */
+  outline: none;
+}
+
+p {
+  color: #666666;
+}
+
+a {
+  color: #000000; /* Change to black */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: #391b1b; /* Change to a darker shade of black */
+}
+
+div span {
+  cursor: pointer;
+  color: #000000; /* Change to black */
+  transition: color 0.3s ease;
+}
+
+
+
+
+
+/* div .google-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+div .google-container span {
+  margin-left: 10px;
+} */
+
+
+div .google-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 50px;
+  background-color: rgb(234, 231, 231); /* Set initial background color */
+  cursor: pointer;
+}
+
+div .google-container span {
+  margin-left: 10px;
+  padding: 8px; /* Add padding for a larger clickable area */
+  color: black;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+

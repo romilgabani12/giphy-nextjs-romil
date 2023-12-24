@@ -1,0 +1,53 @@
+/* trends.css */
+
+.giphy-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.giphy-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.giphy-item iframe {
+  width: 100%;
+  height: 200px;
+  /* Adjust the height as needed */
+  object-fit: cover;
+}
+
+.giphy-item p {
+  margin-top: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.giphy-item button {
+  background-color: #4285f4;
+  color: white;
+  padding: 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.giphy-item button:hover {
+  background-color: #3a79d2;
+}
+
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
