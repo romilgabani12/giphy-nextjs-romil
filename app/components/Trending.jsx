@@ -5,7 +5,8 @@ import { useAuth } from '../auth';
 import './trending.css'
 import { getDoc, doc } from "firebase/firestore";
 import { db } from '../firebase';
-
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Trending = () => {
 
@@ -18,28 +19,30 @@ const Trending = () => {
     const [favorites, setFavorites] = useState([])
     const [isLoading, setIsLoading] = useState(true);
 
-    
+    const apiUrl = `https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${50}&offset=${0}`;
+    let debounceTimeout;
 
     useEffect(() => {
         const fetchUserFavorites = async () => {
             try {
                 const userFavourite = await getDoc(doc(db, 'giphy', authUser?.uid))
+                // console.log(userFavourite);
                 setFavorites(userFavourite.data()?.favourite)
             } catch (error) {
                 console.error(error);
             }
         }
         fetchUserFavorites();
-    })
+    },[])
 
     const fetchGif = async () => {
         const newType = searchTerm ? "search" : "trending";
         setType(newType);
 
-        const response = await fetch(`https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${50}&offset=${0}`);
+        const response = await fetch(apiUrl);
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
             setGifData(data.data);
             setIsLoading(false);
         } else {
@@ -48,23 +51,23 @@ const Trending = () => {
     };
 
     useEffect(() => {
-        let debounceTimeout;
-        // Clear previous debounce timeout
+        
+        
         if (debounceTimeout) {
             clearTimeout(debounceTimeout);
         }
-        // Set a new debounce timeout
+        //  new debounce timeout
         debounceTimeout = setTimeout(() => {
             fetchGif();
-        }, 200);
+        }, 500);
 
-        // // Clean up the timeout when the component unmounts
+        
         return () => {
             if (debounceTimeout) {
                 clearTimeout(debounceTimeout);
             }
         };
-    }, [searchTerm, type, `https://api.giphy.com/v1/gifs/${type}?api_key=${apiKey}&q=${searchTerm}&limit=${50}&offset=${0}`]);
+    }, [searchTerm, type,  apiUrl]);
 
 
     const handleFavorite = async (gifId) => {
@@ -90,9 +93,9 @@ const Trending = () => {
                     <div>
                         <p>{gif.title}</p>
                         {favorites.includes(gif.id) ? (
-                            <button onClick={() => handleFavorite(gif.id)}>Remove from Favs</button>
+                            <button onClick={() => handleFavorite(gif.id)}><DeleteIcon/></button>
                         ) : (
-                            <button onClick={() => handleFavorite(gif.id)}>Add to Favs</button>
+                            <button onClick={() => handleFavorite(gif.id)}><FavoriteBorderIcon/></button>
                         )}
                     </div>
                 </div>

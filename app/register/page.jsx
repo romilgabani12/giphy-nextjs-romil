@@ -32,7 +32,7 @@ const Page = () => {
         if (!isLoading && authUser) {
             router.push("/");
         }
-    }, [authUser, isLoading,router]);
+    }, [authUser, isLoading]);
 
 
     const singupHandler = async () => {
