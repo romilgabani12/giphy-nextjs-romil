@@ -15,6 +15,8 @@ import {
 } from "firebase/auth";
 import { useAuth } from '../auth';
 import Loader from '../components/Loader';
+import { setDoc, doc } from 'firebase/firestore'
+
 
 
 const Provider = new GoogleAuthProvider();
@@ -56,6 +58,14 @@ const Page = () => {
                 username,
             });
 
+            const userId = user.uid;
+
+            await setDoc(doc(db, 'giphy', userId), {
+                userId,
+                name: username,
+                email: user.email,
+                favorite: [],
+            })
 
 
         } catch (error) {
