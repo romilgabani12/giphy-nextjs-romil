@@ -11,6 +11,7 @@
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+text-align: center;
 }
 
 .giphy-item iframe {
@@ -27,17 +28,20 @@
 }
 
 .giphy-item button {
-  background-color: #4285f4;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 8px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  
 }
 
 .giphy-item button:hover {
-  background-color: #3a79d2;
+  background-color: red;
+  color: white;
+
 }
 
 
