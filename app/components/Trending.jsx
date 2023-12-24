@@ -2,10 +2,10 @@
 import React, { useState, useEffect } from 'react'
 import Loader from './Loader';
 import { useAuth } from '../auth';
-import './Trending.css'
+import './trending.css'
 import { getDoc, doc } from "firebase/firestore";
 import { db } from '../firebase';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+
 
 const Trending = () => {
 
@@ -91,7 +91,7 @@ const Trending = () => {
                         {favorites.includes(gif.id) ? (
                             <button onClick={() => handleFavorite(gif.id)}>Remove from Favs</button>
                         ) : (
-                            <button onClick={() => handleFavorite(gif.id)}>Add to Favs<FavoriteBorderIcon/></button>
+                            <button onClick={() => handleFavorite(gif.id)}>Add to Favs</button>
                         )}
                     </div>
                 </div>
