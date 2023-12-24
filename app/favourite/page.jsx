@@ -10,7 +10,7 @@ import { useAuth } from "../auth";
 import Image from "next/image";
 import Link from "next/link";
 
-const page = () => {
+const Page = () => {
 
   const apiKey = "GlVGYHkr3WSBnllca54iNt0yFbjz7L65";
   const [gifData, setGifData] = useState([]);
@@ -130,4 +130,4 @@ const page = () => {
   );
 }
 
-export default page
+export default Page

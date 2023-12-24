@@ -21,7 +21,7 @@ const Provider = new GoogleAuthProvider();
 
 
 
-const page = () => {
+const Page = () => {
     const router = useRouter();
     const [username, setUsername] = useState(null);
     const [email, setEmail] = useState(null);
@@ -32,7 +32,7 @@ const page = () => {
         if (!isLoading && authUser) {
             router.push("/");
         }
-    }, [authUser, isLoading]);
+    }, [authUser, isLoading,router]);
 
 
     const singupHandler = async () => {
@@ -143,4 +143,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

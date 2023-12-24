@@ -19,7 +19,7 @@ const Provider = new GoogleAuthProvider();
 
 
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
@@ -29,7 +29,7 @@ const page = () => {
     if (!isLoading && authUser) {
       router.push("/");
     }
-  }, [authUser, isLoading]);
+  }, [authUser, isLoading,router]);
 
 
   const loginHandler = async () => {
@@ -120,4 +120,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Page

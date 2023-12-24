@@ -30,7 +30,7 @@ const Trending = () => {
             }
         }
         fetchUserFavorites();
-    }, [setFaved])
+    })
 
     const fetchGif = async () => {
         const newType = searchTerm ? "search" : "trending";
