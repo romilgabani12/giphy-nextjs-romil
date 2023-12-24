@@ -7,32 +7,46 @@
     padding: 20px;
 }
 
+
 .logo-container {
-    text-align: left;
-    margin-right: 20px;
-    /* Adjust margin as needed */
+    display: flex;
+    align-items: center;
     background-color: #f0f0f0;
-    /* Set your desired background color */
     padding: 10px;
-    /* Add padding for better visual */
     border-radius: 5px;
-    /* Add border-radius for rounded corners */
 }
 
+.arrowbutton {
+    margin-right: 10px;
+    cursor: pointer;
+
+}
+
+
+
 .logo-image {
+    margin: 0 auto; /* Center the image horizontally */
     width: 230px;
     height: 40px;
 }
 
-.gif-container {
-    flex-grow: 1;
-}
+
+
 
 .gifContainer {
-    margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    display: inline-block;
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+}
+
+.gif-container {
+    flex-grow: 1;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; 
 }
 
 .gifWrapper {

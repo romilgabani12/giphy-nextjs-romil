@@ -9,6 +9,9 @@ import './favourite.css'
 import { useAuth } from "../auth";
 import Image from "next/image";
 import Link from "next/link";
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useRouter } from 'next/navigation';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const Page = () => {
 
@@ -19,6 +22,8 @@ const Page = () => {
   const [userId, setUserId] = useState('');
   const searchParams = useSearchParams();
   const [temp, setTemp] = useState(true);
+  const router = useRouter();
+  
 
   const { authUser } = useAuth();
 
@@ -50,16 +55,19 @@ const Page = () => {
 
     const getAllGIFs = async () => {
       const fetchedGIFs = [];
-
-      await Promise.all(
-        favouriteData.map(async (item) => {
-          const url = `https://api.giphy.com/v1/gifs?api_key=${apiKey}&ids=${item}`;
-          const ans = await fetch(url);
-          const response = await ans.json();
-          // console.log(response.data);
-          fetchedGIFs.push(...response.data);
-        })
-      );
+      if (favouriteData && Array.isArray(favouriteData)) {
+        await Promise.all(
+          favouriteData.map(async (item) => {
+            const url = `https://api.giphy.com/v1/gifs?api_key=${apiKey}&ids=${item}`;
+            const ans = await fetch(url);
+            const response = await ans.json();
+            // console.log(response.data);
+            fetchedGIFs.push(...response.data);
+          })
+        );
+      } else {
+        console.error('favouriteData is not defined or not an array');
+      }
 
       setGifData(fetchedGIFs);
       setIsLoading(false);
@@ -84,7 +92,15 @@ const Page = () => {
   ) : (
     <div>
       <div>
+
         <div className="logo-container">
+          <ArrowBackIcon 
+          className="arrowbutton" 
+          style={{ fontSize: '40px', width: '40px', height: '40px' }}
+            onClick={()=>{
+              router.push("/")
+            }}
+          />
           <Image
             className="logo-image"
             src="https://upload.wikimedia.org/wikipedia/commons/8/82/Giphy-logo.svg"
@@ -110,7 +126,7 @@ const Page = () => {
                     onClick={() => handleFavorite(gif.id)}
                     className="favoriteButton"
                   >
-                    Remove From Favorite
+                    <DeleteIcon/>
                   </button>
                 </div>
               </div>
@@ -119,7 +135,7 @@ const Page = () => {
         ) : (
           <div className="noDataMessage">
             No Favourite Item Here....
-            <div><br/>
+            <div><br />
               Go To <Link href={"/"}>Home Page</Link>
             </div>
           </div>
